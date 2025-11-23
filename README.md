@@ -38,7 +38,7 @@ Preprocessing + Feature Engineering
 Spark MLlib Models (Logistic Regression, etc.)
       ↓
 Metrics, Predictions, HTML / Notebook Analysis
-
+```
 ### 🛠 Tech Stack
 - PySpark (SparkSession, MLlib)
 - MySQL (JDBC ingestion)
