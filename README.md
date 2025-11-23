@@ -47,3 +47,54 @@ Metrics, Predictions, HTML / Notebook Analysis
 - HTML EDA Reports
 - Machine Learning Models (Logistic Regression etc.)
 
+### 📁 Project Structure
+
+heart-disease-pyspark-pipeline/
+│
+├── notebooks/
+│   ├── heart_analysis.html
+│   ├── heart_analysis.ipynb
+│   └── heart_analysis.py
+│
+├── pyspark_pipeline/
+│   ├── pyspark_pipeline.html
+│   ├── pyspark_pipeline.ipynb
+│   └── pyspark_pipeline.py
+│
+├── README.md
+
+### ▶️ How to Run
+
+1. Install Java 11
+2. Install Apache Spark + Hadoop
+3. Install MySQL and create database `heart_db`
+4. Load CSV into MySQL table
+5. Install dependencies:
+   pip install pyspark pandas mysql-connector-python
+6. Run PySpark pipeline:
+   python pyspark_pipeline/pyspark_pipeline.py
+
+### 🤖 ML Pipeline Components
+- Data ingestion from MySQL using JDBC
+- Missing value handling
+- Categorical encoding (StringIndexer + OneHotEncoder)
+- VectorAssembler for feature combination
+- Model training (Logistic Regression)
+- Train/test split
+- ROC-AUC and accuracy evaluation
+
+⚠️ Key Challenges & How I Solved Them
+
+SQL and Excel stored categorical values differently (1 vs '1.0')
+✔ Solved by creating a custom preprocessing step that standardizes all categorical inputs into a single consistent format.
+
+StringIndexer & OneHotEncoder produced mismatched category mappings
+✔ Fixed by re-training the entire ML pipeline so that indexer labels and encoder outputs are fully aligned.
+
+Unseen or missing category values caused indexing problems
+✔ Added handleInvalid='keep' and custom fallback rules to safely map unexpected values.
+
+### 📊 Results
+- Logistic Regression Accuracy: 67.39%
+- ROC-AUC Score: 65.75%
+- Confusion matrix included in report
